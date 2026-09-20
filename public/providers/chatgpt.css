@@ -1,0 +1,45 @@
+#llm-wallpaper-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -999999 !important;
+  pointer-events: none !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  transition: opacity 0.15s ease, filter 0.15s ease;
+  transform: translateZ(0);
+  will-change: opacity, filter;
+}
+
+html,
+body,
+main,
+[role="main"],
+#__next {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+#thread,
+#thread-bottom,
+#thread-bottom-container,
+.composer-parent {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+#thread::before,
+#thread::after,
+#thread-bottom::before,
+#thread-bottom::after,
+#thread-bottom-container::before,
+#thread-bottom-container::after,
+.composer-parent::before,
+.composer-parent::after {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+}

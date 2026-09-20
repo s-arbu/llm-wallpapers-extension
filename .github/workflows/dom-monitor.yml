@@ -1,0 +1,42 @@
+name: LLM DOM Integrity Check
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 8 * * *' # Runs daily at 8:00 AM UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dom-monitor-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-dom:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - run: bun install --frozen-lockfile
+      - run: bunx playwright install --with-deps chromium
+      - name: Run unit tests
+        run: bun run test:unit
+      - name: Build extension
+        run: bun run build
+      - name: Run DOM Assertion Tests
+        run: bun run test:dom
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore

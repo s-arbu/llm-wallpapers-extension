@@ -2,6 +2,7 @@ import { getSettings, WallpaperSettings } from '../utils/storage';
 import { getProvider } from '../providers';
 
 const provider = getProvider(new URL(window.location.href));
+let currentSettings: WallpaperSettings | undefined;
 
 function loadProviderStylesheet() {
   if (!provider || document.querySelector(`link[data-llm-wallpaper-provider="${provider.id}"]`)) return;
@@ -19,6 +20,12 @@ function injectOverlay() {
   const overlay = document.createElement('div');
   overlay.id = 'llm-wallpaper-overlay';
   document.documentElement.appendChild(overlay);
+}
+
+function restoreProviderUi() {
+  loadProviderStylesheet();
+  injectOverlay();
+  if (currentSettings) applySettings(currentSettings);
 }
 
 function applySettings(settings: WallpaperSettings) {
@@ -42,12 +49,25 @@ async function init() {
   loadProviderStylesheet();
   injectOverlay();
   const settings = await getSettings();
+  currentSettings = settings;
   applySettings(settings);
+
+  const observer = new MutationObserver(() => {
+    if (!document.getElementById('llm-wallpaper-overlay') ||
+        !document.querySelector(`link[data-llm-wallpaper-provider="${provider.id}"]`)) {
+      restoreProviderUi();
+    }
+  });
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+  restoreProviderUi();
 
   chrome.storage.onChanged.addListener((changes, namespace) => {
     if (namespace === 'local' && changes.llm_wallpaper_settings) {
       const newSettings = changes.llm_wallpaper_settings.newValue as WallpaperSettings | undefined;
-      if (newSettings) applySettings(newSettings);
+      if (newSettings) {
+        currentSettings = newSettings;
+        restoreProviderUi();
+      }
     }
   });
 }

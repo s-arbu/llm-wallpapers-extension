@@ -3,9 +3,13 @@
   "module": "src/content/content.ts",
   "type": "module",
   "scripts": {
-    "build": "vite build && vite build --config vite.content.config.ts"
+    "build": "vite build && vite build --config vite.content.config.ts",
+    "test:unit": "bun test tests/providers.test.ts",
+    "test:dom": "bunx playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/bun": "^1.4.2",
     "@types/chrome": "latest",
     "typescript": "latest",
     "vite": "latest"

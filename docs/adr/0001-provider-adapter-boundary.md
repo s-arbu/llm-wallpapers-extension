@@ -2,7 +2,7 @@
 
 Status: accepted
 
-LLM Wallpapers will keep wallpaper capabilities provider-neutral and isolate host matching, page transparency rules, DOM details, and provider-specific quirks behind provider adapters. The initial release is Gemini-first and should advertise only implemented provider behavior; this preserves a path to ChatGPT and Claude without duplicating the settings, storage, and image-processing layers.
+LLM Wallpapers will keep wallpaper capabilities provider-neutral and isolate host matching, page transparency rules, DOM details, and provider-specific quirks behind provider adapters. The alpha currently supports Gemini and ChatGPT and should advertise only implemented provider behavior; this preserves a path to additional providers without duplicating the settings, storage, and image-processing layers.
 
 ## Considered Options
 

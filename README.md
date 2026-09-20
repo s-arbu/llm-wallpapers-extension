@@ -4,7 +4,7 @@
 
 LLM Wallpapers is a Chromium extension that lets you bring a little more personality to AI chat interfaces without sacrificing readability. Choose an image, tune its opacity and blur, and keep the conversation in focus.
 
-The project is currently a **Gemini-first alpha**. ChatGPT and Claude are the next provider adapters on the roadmap.
+The project is currently an experimental provider alpha supporting Gemini and ChatGPT. Claude remains on the roadmap.
 
 [Report an issue](https://github.com/s-arbu/llm-wallpapers-extension/issues/new) | [View roadmap and issues](https://github.com/s-arbu/llm-wallpapers-extension/issues)
 
@@ -13,10 +13,10 @@ The project is currently a **Gemini-first alpha**. ChatGPT and Claude are the ne
 | Provider | Status |
 | --- | --- |
 | Google Gemini | Supported |
-| ChatGPT | Planned |
+| ChatGPT | Supported |
 | Claude | Planned |
 
-The first release is focused on Gemini. ChatGPT and Claude are planned, but are not supported yet.
+ChatGPT and Gemini are supported in the current alpha. Provider behavior is still subject to change as the extension adapts to upstream DOM changes.
 
 ## Features
 
@@ -40,9 +40,9 @@ The extension is currently available as an early build for Chromium-based browse
 3. Open `chrome://extensions` in your browser.
 4. Turn on **Developer mode**.
 5. Select **Load unpacked** and choose the repository's `dist/` folder.
-6. Open [Gemini](https://gemini.google.com/), then open LLM Wallpapers from your browser toolbar.
+6. Open [Gemini](https://gemini.google.com/) or [ChatGPT](https://chatgpt.com/), then open LLM Wallpapers from your browser toolbar.
 
-After rebuilding, return to `chrome://extensions`, click the extension's reload button, and refresh Gemini.
+After rebuilding, return to `chrome://extensions`, click the extension's reload button, and refresh the provider page.
 
 </details>
 
@@ -63,6 +63,12 @@ bun run build
 
 </details>
 
+## Continuous Integration
+
+GitHub Actions runs the unit tests, extension build, and live Playwright DOM
+checks on every push, pull request, daily at 08:00 UTC, and on manual dispatch.
+If a run fails, the Playwright report is uploaded as a workflow artifact.
+
 ## Privacy
 
 Wallpaper images and settings stay in the browser's local extension storage. The project does not currently require an account, a backend, or a project server. The extension is designed to keep your selected images on your device.
@@ -70,11 +76,11 @@ Wallpaper images and settings stay in the browser's local extension storage. The
 ## Roadmap
 
 - [x] Gemini wallpaper support
+- [x] ChatGPT wallpaper support
 - [x] Local image compression and settings persistence
 - [x] Provider adapter boundary
-- [ ] ChatGPT adapter
 - [ ] Claude adapter
-- [ ] Automated tests for provider matching and settings behavior
+- [x] Automated provider matching tests and DOM monitoring
 - [ ] Chrome Web Store release workflow
 
 ## Help and Feedback

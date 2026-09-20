@@ -57,7 +57,7 @@ Transform tasks into verifiable goals:
 
 For multi-step tasks, state a brief plan:
 
-```
+```text
 1. [Step] → verify: [check]
 2. [Step] → verify: [check]
 3. [Step] → verify: [check]
@@ -82,3 +82,7 @@ Uses the default labels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready
 ### Domain docs
 
 This is a single-context repository with `CONTEXT.md` and ADRs under `docs/adr/`. See `docs/agents/domain.md`.
+
+### Commit messages
+
+Use concise Conventional Commit messages focused on intent rather than a long change inventory. See `docs/agents/commit-messages.md` when writing or reviewing a commit message.
