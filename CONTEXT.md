@@ -1,0 +1,36 @@
+# LLM Wallpapers
+
+LLM Wallpapers personalizes supported AI chat interfaces with a user-selected wallpaper while keeping conversation content readable through adjustable opacity and blur. The current release is an experimental Chromium extension focused on Gemini.
+
+## Product Language
+
+**Wallpaper**:
+A user-selected image displayed behind a supported AI chat interface.
+_Avoid_: Background, theme image
+
+**Supported provider**:
+An AI chat service for which the extension has an implemented integration that can safely apply the wallpaper experience.
+_Avoid_: Compatible site, platform
+
+**Provider adapter**:
+The provider-specific integration that handles host matching, page transparency rules, DOM details, and service-specific quirks.
+_Avoid_: Provider implementation, site hack
+
+**Gemini-first alpha**:
+The current release posture: Gemini is the only supported provider, while shared capabilities are shaped so additional providers can be added later.
+_Avoid_: Full multi-provider support, production release
+
+**Wallpaper settings**:
+The local configuration for the selected wallpaper, opacity, blur, and source filename.
+_Avoid_: User profile, account settings
+
+**Local-only**:
+A data boundary in which wallpaper images and settings stay in the browser's local extension storage and are not sent to a project server.
+_Avoid_: Private cloud, synced settings
+
+## Product Boundaries
+
+- The first audience is individual users who want a more personal and visually comfortable Gemini experience.
+- Shared capabilities include wallpaper selection, image compression, local storage, opacity, blur, reset, and settings UI.
+- Cloud sync, accounts, and a shared wallpaper library are outside the initial product boundary.
+- The alpha release may change APIs and settings and should direct users to GitHub Issues for reports and requests.

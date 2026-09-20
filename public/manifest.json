@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "LLM Wallpapers - alpha",
+  "version": "0.0.1",
+  "description": "Custom wallpapers and themes for ChatGPT, Claude, and Gemini.",
+  "permissions": ["storage", "unlimitedStorage"],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://*.chatgpt.com/*",
+    "https://claude.ai/*",
+    "https://gemini.google.com/*"
+  ],
+  "action": {}, 
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://*.chatgpt.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["providers/*.css"],
+      "matches": ["https://gemini.google.com/*"]
+    }
+  ]
+}

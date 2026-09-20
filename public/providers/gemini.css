@@ -1,0 +1,56 @@
+:root {
+  --llm-wp-bg: none;
+  --llm-wp-opacity: 0.15;
+  --llm-wp-blur: 0px;
+}
+
+#llm-wallpaper-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: -999999 !important;
+  pointer-events: none !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  transition: opacity 0.15s ease, filter 0.15s ease;
+  transform: translateZ(0);
+  will-change: opacity, filter;
+}
+
+html,
+body,
+main,
+[role="main"],
+#root,
+.conversation-container,
+chat-app,
+.chat-input-container {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+* {
+  --bard-color-surface: transparent !important;
+  --gm3-sys-color-surface: transparent !important;
+  --gm3-sys-color-surface-container: transparent !important;
+  --gm3-sys-color-surface-container-lowest: transparent !important;
+}
+
+[class*="bottom-container"],
+[class*="gradient"],
+[class*="input-area"],
+footer,
+[class*="bottom-container"]::before,
+[class*="bottom-container"]::after,
+[class*="gradient"]::before,
+[class*="gradient"]::after {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
