@@ -25,6 +25,19 @@ jobs:
           bun-version: 1.4.2
       - run: bun install --frozen-lockfile
       - run: bunx playwright install --with-deps chromium
+      - name: Restore authenticated Playwright state
+        id: auth-state
+        env:
+          PLAYWRIGHT_AUTH_STATE_B64: ${{ secrets.PLAYWRIGHT_AUTH_STATE_B64 }}
+        run: |
+          if [ -z "$PLAYWRIGHT_AUTH_STATE_B64" ]; then
+            echo "authenticated=false" >> "$GITHUB_OUTPUT"
+            echo "No authenticated Playwright state configured; running public-page checks."
+            exit 0
+          fi
+          mkdir -p playwright/.auth
+          printf '%s' "$PLAYWRIGHT_AUTH_STATE_B64" | base64 --decode > playwright/.auth/storageState.json
+          echo "authenticated=true" >> "$GITHUB_OUTPUT"
       - name: Run unit tests
         run: bun run test:unit
       - name: Build extension
@@ -32,7 +45,7 @@ jobs:
       - name: Run DOM Assertion Tests
         run: bun run test:dom
       - name: Upload Playwright report on failure
-        if: failure()
+        if: ${{ failure() && steps.auth-state.outputs.authenticated != 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report

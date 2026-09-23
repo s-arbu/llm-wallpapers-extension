@@ -4,7 +4,7 @@
 
 LLM Wallpapers is a Chromium extension that lets you bring a little more personality to AI chat interfaces without sacrificing readability. Choose an image, tune its opacity and blur, and keep the conversation in focus.
 
-The project is currently an experimental provider alpha supporting Gemini and ChatGPT. Claude remains on the roadmap.
+The project is currently an experimental provider alpha supporting Gemini, ChatGPT, and Claude.
 
 [Report an issue](https://github.com/s-arbu/llm-wallpapers-extension/issues/new) | [View roadmap and issues](https://github.com/s-arbu/llm-wallpapers-extension/issues)
 
@@ -14,7 +14,7 @@ The project is currently an experimental provider alpha supporting Gemini and Ch
 | --- | --- |
 | Google Gemini | Supported |
 | ChatGPT | Supported |
-| Claude | Planned |
+| Claude | Supported |
 
 ChatGPT and Gemini are supported in the current alpha. Provider behavior is still subject to change as the extension adapts to upstream DOM changes.
 
@@ -40,7 +40,7 @@ The extension is currently available as an early build for Chromium-based browse
 3. Open `chrome://extensions` in your browser.
 4. Turn on **Developer mode**.
 5. Select **Load unpacked** and choose the repository's `dist/` folder.
-6. Open [Gemini](https://gemini.google.com/) or [ChatGPT](https://chatgpt.com/), then open LLM Wallpapers from your browser toolbar.
+6. Open [Gemini](https://gemini.google.com/), [ChatGPT](https://chatgpt.com/),or [Claude](https://claude.ai/) then open LLM Wallpapers from your browser toolbar.
 
 After rebuilding, return to `chrome://extensions`, click the extension's reload button, and refresh the provider page.
 
@@ -77,11 +77,16 @@ Wallpaper images and settings stay in the browser's local extension storage. The
 
 - [x] Gemini wallpaper support
 - [x] ChatGPT wallpaper support
+- [x] Claude wallpaper support
 - [x] Local image compression and settings persistence
 - [x] Provider adapter boundary
-- [ ] Claude adapter
 - [x] Automated provider matching tests and DOM monitoring
-- [ ] Chrome Web Store release workflow
+- [ ] Beta readiness: authenticated DOM checks, provider smoke checks, and release checklist
+- [ ] Pre-release: Chrome Web Store packaging, privacy review, and rollback process
+- [ ] V2: bundled wallpaper gallery with user-selectable presets
+- [ ] V2: user-uploaded wallpapers alongside bundled presets
+
+See [ROADMAP.md](ROADMAP.md) for scope, sequencing, and the authenticated test-state plan.
 
 ## Help and Feedback
 
@@ -104,7 +109,6 @@ Contributions are welcome, although this is still a small early-stage project. P
 For provider work, keep shared wallpaper behavior separate from provider-specific host matching, page transparency rules, DOM details, and service-specific quirks.
 
 </details>
-<!-- markdownlint-enable MD033 -->
 
 ## License
 

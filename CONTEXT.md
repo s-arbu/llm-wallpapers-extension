@@ -1,6 +1,6 @@
 # LLM Wallpapers
 
-LLM Wallpapers personalizes supported AI chat interfaces with a user-selected wallpaper while keeping conversation content readable through adjustable opacity and blur. The current release is an experimental Chromium extension supporting Gemini and ChatGPT.
+LLM Wallpapers personalizes supported AI chat interfaces with a user-selected wallpaper while keeping conversation content readable through adjustable opacity and blur. The current release is an experimental Chromium extension supporting Gemini, ChatGPT, and Claude.
 
 ## Product Language
 
@@ -17,7 +17,7 @@ The provider-specific integration that handles host matching, page transparency 
 _Avoid_: Provider implementation, site hack
 
 **Provider alpha**:
-The current release posture: Gemini and ChatGPT are supported providers, while shared capabilities remain deliberately small and additional providers can be added later.
+The current release posture: Gemini, ChatGPT, and Claude are supported providers, while shared capabilities remain deliberately small and additional providers can be added later.
 _Avoid_: Full multi-provider support, production release
 
 **Wallpaper settings**:
