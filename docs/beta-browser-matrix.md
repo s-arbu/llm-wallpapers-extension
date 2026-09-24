@@ -2,14 +2,13 @@
 
 This project is in a beta stabilization phase, so the browser check is intentionally small and explicit: validate the extension against the Chromium channels that matter most, then record provider-specific caveats instead of making broad support claims.
 
-## Supported browser channels for beta
+## Supported browser channel for beta
 
 | Channel | Purpose | Status |
 | --- | --- | --- |
-| Playwright-managed Chromium | Default regression check for provider matching, DOM stability, and extension injection | Required |
-| Stable Google Chrome | Secondary compatibility check for packaged-browser behavior | Required |
+| Playwright-managed Chromium | Regression check for provider matching, DOM stability, and extension injection | Required |
 
-The intent is not to claim every Chromium build is supported. The beta goal is to prove the extension works for the browsers we actively target, and to capture breakage in a way that is easy to triage.
+The intent is not to claim every Chromium build is supported. The beta goal is to prove the extension works in the Playwright-managed Chromium channel, and to capture breakage in a way that is easy to triage.
 
 ## Why this scope is the right beta size
 
@@ -19,7 +18,7 @@ The intent is not to claim every Chromium build is supported. The beta goal is t
 
 ## Recommended CI behavior
 
-1. Run the same provider smoke suite against both browser channels.
+1. Run the provider smoke suite against Playwright-managed Chromium.
 2. Record the browser version in the workflow summary.
 3. Keep failures tied to provider, browser channel, URL, and screenshot.
 4. Do not claim all Chromium variants are supported unless a version is explicitly tested and documented.

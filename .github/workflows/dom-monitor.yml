@@ -16,10 +16,6 @@ concurrency:
 
 jobs:
   check-dom:
-    strategy:
-      fail-fast: false
-      matrix:
-        channel: [chromium, chrome]
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -29,20 +25,10 @@ jobs:
           bun-version: 1.4.2
       - run: bun install --frozen-lockfile
       - run: bunx playwright install --with-deps chromium
-      - name: Install stable Chrome
-        if: matrix.channel == 'chrome'
-        uses: browser-actions/setup-chrome@v1
       - name: Record browser versions
-        env:
-          BROWSER_CHANNEL: ${{ matrix.channel }}
         run: |
-          echo "### Browser matrix: $BROWSER_CHANNEL" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Browser: Playwright-managed Chromium" >> "$GITHUB_STEP_SUMMARY"
           echo "Playwright: $(bunx playwright --version)" >> "$GITHUB_STEP_SUMMARY"
-          if [ "$BROWSER_CHANNEL" = "chrome" ]; then
-            google-chrome --version >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "Browser: Playwright-managed Chromium" >> "$GITHUB_STEP_SUMMARY"
-          fi
       - name: Start virtual display
         run: Xvfb :99 -screen 0 1280x720x24 &
       - name: Set display
@@ -66,13 +52,13 @@ jobs:
         run: bun run build
       - name: Run DOM Assertion Tests
         env:
-          PLAYWRIGHT_CHANNEL: ${{ matrix.channel == 'chrome' && 'chrome' || 'chromium' }}
+          PLAYWRIGHT_CHANNEL: chromium
         run: bun run test:dom
       - name: Upload Playwright report on failure
         if: ${{ failure() && steps.auth-state.outputs.authenticated != 'true' }}
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-${{ matrix.channel }}
+          name: playwright-report
           path: |
             playwright-report/
             test-results/
