@@ -10,10 +10,30 @@ const DEFAULT_OPTIONS: ImageCompressionOptions = {
   quality: 0.92   // High-fidelity quality output
 };
 
+async function fileToDataUrl(file: File): Promise<string> {
+  if (typeof FileReader !== 'undefined') {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  const buffer = Buffer.from(await file.arrayBuffer());
+  return `data:${file.type || 'application/octet-stream'};base64,${buffer.toString('base64')}`;
+}
+
 export async function compressImageToDataUrl(
   file: File,
   options: ImageCompressionOptions = {}
 ): Promise<string> {
+  const isGif = file.type === 'image/gif' || file.name.toLowerCase().endsWith('.gif');
+
+  if (isGif) {
+    return fileToDataUrl(file);
+  }
+
   const opts = { ...DEFAULT_OPTIONS, ...options };
   const bitmap = await createImageBitmap(file);
 

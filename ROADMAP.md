@@ -1,20 +1,24 @@
 # Roadmap
 
-The roadmap keeps the provider alpha small while making the beta and pre-release gates explicit.
+The project is ready for a small GitHub-distributed beta. The Chrome Web Store release remains a later milestone with additional review and packaging work.
 
-## Current: Provider Alpha
+## Current: GitHub Beta
 
 - Gemini, ChatGPT, and Claude adapters are implemented.
 - Wallpaper images and settings remain local to browser extension storage.
 - Provider matching has unit coverage and public-page DOM monitoring.
+- The extension can be built from source and downloaded as a GitHub release zip.
+- Beta feedback is collected through GitHub Issues with provider, browser, route, and screenshot details.
 
 ## Beta Readiness
 
-1. Add authenticated Playwright checks for routes that are unavailable behind login walls.
-2. Add provider smoke checks that verify the overlay and stylesheet load, not only a landing-page selector.
-3. Run the checks across supported Chromium versions and document known provider-specific failures.
-4. Define a small issue template for provider, browser version, route, and screenshot.
-5. Freeze the wallpaper settings shape for the beta and document migration expectations.
+1. [x] Add authenticated Playwright checks for routes that are unavailable behind login walls.
+2. [x] Add provider smoke checks that verify the overlay and stylesheet load, not only a landing-page selector.
+3. [x] Run the checks across supported Chromium versions and document known provider-specific failures.
+4. [x] Define a small issue template for provider, browser version, route, and screenshot.
+5. [x] Freeze the wallpaper settings shape for the beta and document migration expectations.
+6. [x] Document GitHub beta installation and release workflow.
+7. [ ] Commit and push the release-ready changes, then create a version tag to publish the beta.
 
 ### Authentication blocker
 
@@ -30,7 +34,7 @@ Recommended CI flow:
 
 This does not bypass authentication. It tests with an account the project maintainer controls. Rotate the state whenever the test account signs out, and never commit the decoded file.
 
-## Pre-release
+## Later: Chrome Web Store Pre-release
 
 - Chrome Web Store packaging and permissions review.
 - Privacy review covering local image storage, host permissions, and authenticated test data handling.

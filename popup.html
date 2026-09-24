@@ -38,6 +38,7 @@
     }
 
     header { margin-bottom: 32px; text-align: center; }
+    .brand-mark { width: 64px; height: 64px; display: block; margin: 0 auto 16px; }
     h1 { margin: 0 0 8px 0; font-size: 24px; font-weight: 600; }
     p { margin: 0; color: var(--text-muted); font-size: 14px; }
 
@@ -111,6 +112,7 @@
 
   <div class="dashboard">
     <header>
+      <img class="brand-mark" src="logo.svg" alt="">
       <h1>LLM Wallpapers</h1>
       <p>Configure your workspace background</p>
     </header>
@@ -120,7 +122,7 @@
       <div class="file-row">
         <!-- The label acts as the button, triggering the hidden input -->
         <label for="imageInput" class="btn btn-primary">Choose File</label>
-        <input type="file" id="imageInput" accept="image/*" hidden>
+        <input type="file" id="imageInput" accept="image/*,.gif,.png,.jpg,.jpeg,.webp" hidden>
         
         <div class="file-name" id="fileNameDisplay">No file chosen</div>
         <button id="resetBtn" class="btn btn-danger">Remove</button>

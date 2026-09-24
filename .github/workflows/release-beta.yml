@@ -1,0 +1,34 @@
+name: Release beta
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Build extension
+        run: bun run build
+      - name: Package release zip
+        run: |
+          mkdir -p out
+          cd dist
+          zip -r ../out/llm-wallpapers-${{ github.ref_name }}.zip .
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: out/*.zip
+          generate_release_notes: true
+          prerelease: true

@@ -1,112 +1,154 @@
-# LLM Wallpapers
+<p align="center">
+  <img src="public/logo.svg" width="72" alt="LLM Wallpapers logo" />
+</p>
 
-> Personal wallpapers for AI conversations, designed to stay out of the way.
+<h1 align="center">LLM Wallpapers</h1>
 
-LLM Wallpapers is a Chromium extension that lets you bring a little more personality to AI chat interfaces without sacrificing readability. Choose an image, tune its opacity and blur, and keep the conversation in focus.
+<div align="center">
+  <a href="#readme"><strong>README</strong></a>
+  <span> · </span>
+  <a href="#install">Install</a>
+  <span> · </span>
+  <a href="#privacy">Privacy</a>
+  <span> · </span>
+  <a href="#license">MIT license</a>
+</div>
 
-The project is currently an experimental provider alpha supporting Gemini, ChatGPT, and Claude.
+---
+
+A refined Chrome extension for making AI chat windows feel more like your workspace and less like a blank browser tab.
+
+Use it to put your own image behind [ChatGPT](https://chatgpt.com/), [Claude](https://claude.ai/), and [Gemini](https://gemini.google.com/), then soften it with blur and opacity so the conversation stays readable.
 
 [Report an issue](https://github.com/s-arbu/llm-wallpapers-extension/issues/new) | [View roadmap and issues](https://github.com/s-arbu/llm-wallpapers-extension/issues)
 
-## What It Supports
+## Works with
 
-| Provider | Status |
-| --- | --- |
-| Google Gemini | Supported |
-| ChatGPT | Supported |
-| Claude | Supported |
+- ChatGPT
+- Claude
+- Gemini
+- more coming soon...
 
-ChatGPT and Gemini are supported in the current alpha. Provider behavior is still subject to change as the extension adapts to upstream DOM changes.
+## Why this exists
 
-## Features
+Most AI chat UIs are clean, but they can also feel cold and generic. LLM Wallpapers lets you keep the clean layout while adding a background that feels more like your own setup.
 
-- Select a local image as your conversation wallpaper.
-- Compress large images before storing them in the browser.
-- Adjust wallpaper opacity and blur in real time.
-- Keep settings local to the browser through Chrome extension storage.
-- Open a GitHub issue directly from the settings page.
-- Add new AI providers through focused provider adapters.
+It is useful when you want:
+
+- a personal wallpaper behind your chats
+- more contrast control without making the interface feel heavy
+- a simple browser-local setup with no account or backend
+- a background that stays in place while the conversation remains the focus
+
+## Screenshots
+
+![Screenshot: extension popup](assets/screenshots/popup-screenshot.png)
+
+![Screenshot: wallpaper applied in ChatGPT](assets/screenshots/chatgpt-screenshot.png)
+
+![Screenshot: wallpaper applied in Claude](assets/screenshots/claude-screenshot.png)
+
+![Screenshot: wallpaper applied in Gemini](assets/screenshots/gemini-screenshot.png)
 
 ## Install
 
-The extension is currently available as an early build for Chromium-based browsers. A Chrome Web Store release is planned; until then, install it from the source repository:
+### From a release
 
-<!-- markdownlint-disable MD033 -->
-<details>
-<summary>Show installation steps</summary>
+1. Open the latest beta release on GitHub.
+2. Download the zip file for the extension.
+3. Extract it.
+4. Open `chrome://extensions` in Chrome.
+5. Turn on Developer mode.
+6. Select Load unpacked and choose the extracted folder.
+7. Open [Gemini](https://gemini.google.com/), [ChatGPT](https://chatgpt.com/), or [Claude](https://claude.ai/), then open LLM Wallpapers from the toolbar.
 
-1. Download or clone this repository.
-2. Follow the build steps below to create the extension bundle.
-3. Open `chrome://extensions` in your browser.
-4. Turn on **Developer mode**.
-5. Select **Load unpacked** and choose the repository's `dist/` folder.
-6. Open [Gemini](https://gemini.google.com/), [ChatGPT](https://chatgpt.com/),or [Claude](https://claude.ai/) then open LLM Wallpapers from your browser toolbar.
+### From source
 
-After rebuilding, return to `chrome://extensions`, click the extension's reload button, and refresh the provider page.
-
-</details>
-
-<details>
-<summary>Show requirements and build steps</summary>
-
-Requirements:
-
-- A Chromium-based browser with developer mode enabled.
-- [Bun](https://bun.sh/) 1.4 or newer.
-
-Build the extension:
+1. Clone or download this repo.
+2. Install dependencies with Bun.
+3. Build the extension.
+4. Load the `dist/` folder in Chrome as an unpacked extension.
+5. Open your AI chat page and use the extension.
 
 ```bash
 bun install
 bun run build
 ```
 
-</details>
+### Requirements
 
-## Continuous Integration
-
-GitHub Actions runs the unit tests, extension build, and live Playwright DOM
-checks on every push, pull request, daily at 08:00 UTC, and on manual dispatch.
-If a run fails, the Playwright report is uploaded as a workflow artifact.
+- A Chromium-based browser
+- Developer mode enabled
+- [Bun](https://bun.sh/) 1.4 or newer
 
 ## Privacy
 
-Wallpaper images and settings stay in the browser's local extension storage. The project does not currently require an account, a backend, or a project server. The extension is designed to keep your selected images on your device.
+Your selected image and settings stay in the browser. There is no login, no server, and no cloud sync in the current setup.
+
+---
+---
+
+## Quick notes for maintainers
+
+This section is mainly for devs working on the project.
+
+### Current settings shape
+
+The extension stores wallpaper settings in browser local storage under one object: `llm_wallpaper_settings`.
+
+- `imageDataUrl`: selected image as a data URL, or `null`
+- `fileName`: selected image filename, or `null`
+- `opacity`: number between `0.05` and `1`
+- `blur`: blur amount in pixels
+- `version`: schema version, currently `1`
+
+The schema is intentionally kept stable so older settings can be migrated forward instead of being reset when fields change.
+
+### Release checklist
+
+Before shipping:
+
+- [package.json](package.json): version matches the release tag
+- [public/manifest.json](public/manifest.json): extension version matches the bundle you ship
+- [README.md](README.md): install steps point to the GitHub release asset
+- [.github/workflows/release-beta.yml](.github/workflows/release-beta.yml): release workflow uploads the zip asset
+- [.github/ISSUE_TEMPLATE/provider-bug.md](.github/ISSUE_TEMPLATE/provider-bug.md): bug reports include provider, version, route, and screenshot
+- [docs/beta-browser-matrix.md](docs/beta-browser-matrix.md): browser coverage and provider caveats are listed
 
 ## Roadmap
 
-- [x] Gemini wallpaper support
-- [x] ChatGPT wallpaper support
-- [x] Claude wallpaper support
-- [x] Local image compression and settings persistence
-- [x] Provider adapter boundary
-- [x] Automated provider matching tests and DOM monitoring
-- [ ] Beta readiness: authenticated DOM checks, provider smoke checks, and release checklist
-- [ ] Pre-release: Chrome Web Store packaging, privacy review, and rollback process
-- [ ] V2: bundled wallpaper gallery with user-selectable presets
-- [ ] V2: user-uploaded wallpapers alongside bundled presets
+- [x] Gemini support
+- [x] ChatGPT support
+- [x] Claude support
+- [x] local image compression and saved settings
+- [x] provider adapter boundary
+- [x] automated provider matching and DOM checks
+- [x] beta readiness: provider smoke checks and release checklist
+- [ ] pre-release: Chrome Web Store packaging, privacy review, and rollback plan
+- [ ] V2: bundled wallpaper presets
+- [ ] V2: user-uploaded wallpapers alongside presets
 
-See [ROADMAP.md](ROADMAP.md) for scope, sequencing, and the authenticated test-state plan.
+See [ROADMAP.md](ROADMAP.md) for the broader plan and the authenticated test-state notes.
 
-## Help and Feedback
+## Help and feedback
 
-Found a bug or have an idea? [Report an issue](https://github.com/s-arbu/llm-wallpapers-extension/issues/new) with the provider, browser version, steps to reproduce, and a screenshot when relevant. You can also [browse existing issues](https://github.com/s-arbu/llm-wallpapers-extension/issues) before opening a new one.
+Found a bug or want to suggest a change? [Open an issue](https://github.com/s-arbu/llm-wallpapers-extension/issues/new) with the provider, browser version, and steps to reproduce. If a screenshot helps, include it.
+
+You can also [browse existing issues](https://github.com/s-arbu/llm-wallpapers-extension/issues) before opening a new one.
 
 ## Contributing
 
-Contributions are welcome, although this is still a small early-stage project. Please open an issue first for larger changes so the direction can be agreed before implementation.
+Contributions are welcome. This is still a small early-stage project, so please open an issue first for larger changes before you start.
 
 <details>
-<summary>Show contribution guidelines</summary>
+<summary>Contribution guidelines</summary>
 
-1. Fork the repository and create a new branch from the default branch. Do not work directly on `main`.
-2. Use a short, descriptive branch name, such as `fix/gemini-overlay` or `feature/chatgpt-adapter`.
-3. Keep each branch focused on one bug fix or feature.
+1. Fork the repo and create a new branch from the default branch.
+2. Use a short, descriptive branch name such as `fix/gemini-overlay` or `feature/chatgpt-adapter`.
+3. Keep each change focused on one thing.
 4. Run `bun run build` before opening a pull request.
 5. Explain what changed, how it was tested, and link the related issue.
 6. Open the pull request against the default branch and respond to review feedback in the same branch.
-
-For provider work, keep shared wallpaper behavior separate from provider-specific host matching, page transparency rules, DOM details, and service-specific quirks.
 
 </details>
 

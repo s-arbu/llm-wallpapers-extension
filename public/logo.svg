@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">LLM Wallpapers logo</title>
+  <desc id="desc">Layered wallpaper panels with a focus sparkle</desc>
+  <defs>
+    <linearGradient id="surface" x1="12" y1="8" x2="116" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#27272a"/>
+      <stop offset="1" stop-color="#09090b"/>
+    </linearGradient>
+    <linearGradient id="wallpaper" x1="27" y1="91" x2="94" y2="29" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563eb"/>
+      <stop offset="0.55" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#a7f3d0"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="31" y1="30" x2="104" y2="102" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fafafa" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#d4d4d8" stop-opacity="0.48"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="30" fill="url(#surface)"/>
+  <path d="M27 39a8 8 0 0 1 8-8h50a8 8 0 0 1 8 8v50a8 8 0 0 1-8 8H35a8 8 0 0 1-8-8V39Z" fill="url(#wallpaper)" opacity="0.92"/>
+  <path d="m24 55 25-25h31a8 8 0 0 1 8 8v18L52 89a8 8 0 0 1-11 0L24 72V55Z" fill="#18181b" opacity="0.34"/>
+  <rect x="35" y="25" width="58" height="58" rx="10" fill="url(#panel)" stroke="#fff" stroke-opacity="0.58" stroke-width="2" transform="rotate(7 64 54)"/>
+  <path d="M50 54h28M64 40v28" stroke="#18181b" stroke-linecap="round" stroke-width="4" opacity="0.8"/>
+  <path d="m96 24 3.2 8.8L108 36l-8.8 3.2L96 48l-3.2-8.8L84 36l8.8-3.2L96 24Z" fill="#fef08a"/>
+  <circle cx="96" cy="36" r="14" fill="none" stroke="#fef08a" stroke-opacity="0.28" stroke-width="2"/>
+</svg>
